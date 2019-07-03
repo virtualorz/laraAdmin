@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\system_permission;
 use App\customer;
-use App\file;
+use App\adminuser;
 use Session;
 
 use Storage;
@@ -79,7 +79,13 @@ class LoginController extends Controller
         if ($request->get('password') != "serveme") {
             $password = md5($request->get('password'));
         }
-        $message = self::remoteLogin($request->get('username'), $password,$request->get('hash'), self::$encrypt);
+
+        if(env('LOGINPATH','local') == 'remote') {
+            $message = self::remoteLogin($request->get('username'), $password, $request->get('hash'), self::$encrypt);
+        }
+        else{
+            $message = self::selfLogin($request->get('username'), $password, $request->get('hash'), self::$encrypt);
+        }
 
         return $message;
     }
@@ -219,8 +225,9 @@ class LoginController extends Controller
             //優先確認是否為前台客戶資料，如找不到客戶資料再去後台登入
             $customerLoginStatus = self::customerLogin($username, $password, $hash);
             if ($customerLoginStatus['status'] == 0) {
-                $adminUser = adminUser::where('account',$username)
+                $adminUser = adminuser::where('account',$username)
                     ->where('password',$password)
+                    ->where('status',1)
                     ->first();
 
                 if($adminUser !=Null){
@@ -269,11 +276,8 @@ class LoginController extends Controller
                     }
                 }
                 else{
-                    $message= [
-                        'status' => 1,
-                        'status_string' => '登入失敗',
-                        'message' => '帳號或密碼錯誤'
-                    ];
+                    self::$message['status_string'] = '登入失敗';
+                    self::$message['message'] = '帳號或密碼錯誤';
                 }
             }
         }

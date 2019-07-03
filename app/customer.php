@@ -22,20 +22,4 @@ class customer extends Model
     ];
 
     protected $dates = ['deleted_at'];
-
-    /*
-     * 紀錄
-     */
-    public function log(){
-        return $this->hasMany('App\customer_log','customer_id','id');
-    }
-
-    /*
-     * 最後登入
-     */
-    public function lastLogin(){
-        return $this->hasOne('App\customer_log','customer_id','id')
-            ->whereNotNull('login')
-            ->orderBy('created_at','DESC');
-    }
 }

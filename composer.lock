@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94d4bf9ac7f4a933030e46a346ee2917",
+    "content-hash": "9a2fdb97857c92230b52b92d74949703",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2822,6 +2822,126 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2017-11-27T11:13:29+00:00"
+        },
+        {
+            "name": "virtualorz/actionlog",
+            "version": "0.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/virtualorz/actionLog.git",
+                "reference": "cd1b4ae5cd952fbee7d9098df8e376900d459535"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/virtualorz/actionLog/zipball/cd1b4ae5cd952fbee7d9098df8e376900d459535",
+                "reference": "cd1b4ae5cd952fbee7d9098df8e376900d459535",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Virtualorz\\ActionLog\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "virtualorz",
+                    "email": "virtualorz@gmail.com"
+                }
+            ],
+            "time": "2019-07-03T07:31:20+00:00"
+        },
+        {
+            "name": "virtualorz/fileupload",
+            "version": "0.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/virtualorz/fileupload.git",
+                "reference": "a9dcd9ea65e73996fce5c4cbe344b8ab6577604b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/virtualorz/fileupload/zipball/a9dcd9ea65e73996fce5c4cbe344b8ab6577604b",
+                "reference": "a9dcd9ea65e73996fce5c4cbe344b8ab6577604b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Virtualorz\\Fileupload\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "virtualorz",
+                    "email": "virtualorz@gmail.com"
+                }
+            ],
+            "time": "2019-07-03T07:32:21+00:00"
+        },
+        {
+            "name": "virtualorz/permission",
+            "version": "0.0.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/virtualorz/permission.git",
+                "reference": "b6f8842d8a8d54d37f87d6ce9a1fd75a706fb416"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/virtualorz/permission/zipball/b6f8842d8a8d54d37f87d6ce9a1fd75a706fb416",
+                "reference": "b6f8842d8a8d54d37f87d6ce9a1fd75a706fb416",
+                "shasum": ""
+            },
+            "require": {
+                "virtualorz/actionlog": "^0.0.8",
+                "virtualorz/sitemap": "^0.0.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Virtualorz\\Permission\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "virtualorz",
+                    "email": "virtualorz@gmail.com"
+                }
+            ],
+            "time": "2019-07-03T07:33:27+00:00"
+        },
+        {
+            "name": "virtualorz/sitemap",
+            "version": "0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/virtualorz/sitemap.git",
+                "reference": "04512fe2b67313167b901e94ec05ea6e801919ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/virtualorz/sitemap/zipball/04512fe2b67313167b901e94ec05ea6e801919ee",
+                "reference": "04512fe2b67313167b901e94ec05ea6e801919ee",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Virtualorz\\Sitemap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "virtualorz",
+                    "email": "virtualorz@gmail.com"
+                }
+            ],
+            "time": "2019-06-27T04:02:52+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

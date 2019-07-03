@@ -83,6 +83,10 @@
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
       <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/virtualorz/sitemap" />
+      <path value="$PROJECT_DIR$/vendor/virtualorz/actionlog" />
+      <path value="$PROJECT_DIR$/vendor/virtualorz/permission" />
+      <path value="$PROJECT_DIR$/vendor/virtualorz/fileupload" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

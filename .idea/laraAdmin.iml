@@ -83,6 +83,10 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/theseer/tokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/virtualorz/actionlog" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/virtualorz/fileupload" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/virtualorz/permission" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/virtualorz/sitemap" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
     </content>

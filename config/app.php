@@ -175,6 +175,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Customer Service Providers...
+         */
+        Virtualorz\Sitemap\SitemapServiceProvider::class,
+        Virtualorz\Permission\PermissionServiceProvider::class,
+        Virtualorz\ActionLog\ActionLogServiceProvider::class,
+        Virtualorz\Fileupload\FileuploadServiceProvider::class
+
     ],
 
     /*
@@ -225,6 +233,14 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /*
+         * Customer Alias...
+         */
+        'Sitemap' => Virtualorz\Sitemap\Facades\Sitemap::class,
+        'Permission' => Virtualorz\Permission\Facades\Permission::class,
+        'ActionLog' => Virtualorz\ActionLog\Facades\ActionLog::class,
+        'Fileupload' => Virtualorz\Fileupload\Facades\Fileupload::class,
 
     ],
 
