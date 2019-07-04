@@ -46,11 +46,27 @@ class LoginController extends Controller
             abort(403, '資料錯誤，請洽管理員');
         }
 
-        return view('Login.index',[
+        if(env('LOGIN_VIEW','admin') == 'admin'){
+            return view('AdminLogin.index',[
+                'image' => $image,
+                'hash' => $hash,
+                'title' => $title
+            ]);
+        }
+        else if(env('LOGIN_VIEW','admin') == 'customer'){
+            return view('CustomerLogin.index',[
+                'image' => $image,
+                'hash' => $hash,
+                'title' => $title
+            ]);
+        }
+
+        return view('AdminLogin.index',[
             'image' => $image,
             'hash' => $hash,
             'title' => $title
         ]);
+
     }
 
     /**
@@ -80,7 +96,7 @@ class LoginController extends Controller
             $password = md5($request->get('password'));
         }
 
-        if(env('LOGINPATH','local') == 'remote') {
+        if(env('LOGIN_PATH','local') == 'remote') {
             $message = self::remoteLogin($request->get('username'), $password, $request->get('hash'), self::$encrypt);
         }
         else{

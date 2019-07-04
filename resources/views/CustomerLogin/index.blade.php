@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@if($title != null){{$title}}@else 傑思.愛德威 展示@endif</title>
+    <title>{{env('SYSTEM_TITLE','傑思')}} | 使用者登入</title>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!--===============================================================================================-->
@@ -62,7 +62,7 @@
         <main style="height: 100%;width: 100%;top: -1px;left: -1px"></main>
         <div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41" style="color: #0a0a0a">
-					Hi, 請用指定帳號登入
+					{{ env('LOGIN_TITLE','登入畫面') }}
 				</span>
             <form id="form" class="login100-form validate-form p-b-33 p-t-5" action="{{ Route('login.ajax_login') }}" method="POST">
 
