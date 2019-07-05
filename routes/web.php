@@ -68,6 +68,53 @@ Route::group(['middleware' => ['checkLogin','checkPermission'], 'prefix' => '/Ba
         ]);
     //=======================================================
 
+    /*
+     * 後台管理員
+     */
+    Route::get('/Admin/user',
+        [
+            'as' => 'backend.admin.user' ,
+            'uses' => 'backend\AdminuserController@index',
+            'parent'=> 'backend.index.system',
+            'name' => '後台管理員名單',
+            'label' =>'管理員',
+            'fa' => 'fa-user'
+        ]);
+    Route::get('/Admin/user/add',
+        [
+            'as' => 'backend.admin.user.add' ,
+            'uses' => 'backend\AdminuserController@add',
+            'parent'=> 'backend.admin.user',
+            'name' => '新增'
+        ]);
+    Route::post('/Admin/user/add',
+        [
+            'as' => 'backend.admin.user.ajax_add' ,
+            'uses' => 'backend\AdminuserController@ajax_add',
+            'parent'=> 'backend.admin.user.add'
+        ]);
+    Route::get('/Admin/user/edit/{id}',
+        [
+            'as' => 'backend.admin.user.edit' ,
+            'uses' => 'backend\AdminuserController@edit',
+            'parent'=> 'backend.admin.user',
+            'name' => '編輯'
+        ]);
+    Route::post('/Admin/user/edit',
+        [
+            'as' => 'backend.admin.user.ajax_edit' ,
+            'uses' => 'backend\AdminuserController@ajax_edit',
+            'parent'=> 'backend.admin.user.edit'
+        ]);
+    Route::post('/Sdmin/user/delete',
+        [
+            'as' => 'backend.admin.user.ajax_delete' ,
+            'uses' => 'backend\AdminuserController@ajax_delete',
+            'parent'=> 'backend.admin.user',
+            'name' => '刪除'
+        ]);
+    //=======================================================
+
 
     /*
      * 權限群組
@@ -172,7 +219,7 @@ Route::group(['middleware' => ['checkLogin','checkPermission'], 'prefix' => '/Ba
     //=======================================================
 
     /*
-     * 個人資料捨定
+     * 個人資料設定
      */
     Route::get('/Personal/member',
         [
