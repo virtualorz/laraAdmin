@@ -193,9 +193,11 @@ class LoginController extends Controller
 
                             //取得個人化設定
                             $personal = self::getMemberStyle($user['id']);
-                            $user['pic'] = $personal['pic'];
-                            $user['name'] = $personal['name'];
-                            $user['theme'] = $personal['theme'];
+                            if(count($personal) != 0) {
+                                $user['pic'] = $personal['pic'];
+                                $user['name'] = $personal['name'];
+                                $user['theme'] = $personal['theme'];
+                            }
 
 
                             //存入session
@@ -280,9 +282,11 @@ class LoginController extends Controller
 
                         //取得個人化設定
                         $personal = self::getMemberStyle($adminUser->id);
-                        $adminUser->pic = $personal['pic'];
-                        $adminUser->name = $personal['name'];
-                        $adminUser->theme = $personal['theme'];
+                        if(count($personal) != 0) {
+                            $adminUser->pic = $personal['pic'];
+                            $adminUser->name = $personal['name'];
+                            $adminUser->theme = $personal['theme'];
+                        }
 
 
                         //存入session
@@ -380,9 +384,11 @@ class LoginController extends Controller
 
                 //取得個人化設定
                 $personal = self::getMemberStyle($adminUser['id']);
-                $adminUser['pic'] = $personal['pic'];
-                $adminUser['name'] = $personal['name'];
-                $adminUser['theme'] = $personal['theme'];
+                if(count($personal) != 0) {
+                    $adminUser['pic'] = $personal['pic'];
+                    $adminUser['name'] = $personal['name'];
+                    $adminUser['theme'] = $personal['theme'];
+                }
 
                 //存入session
                 session([env('LOGINSESSION','virtualorz_default') =>
@@ -424,7 +430,6 @@ class LoginController extends Controller
             }
             $result['name'] = $person->show_name;
             $result['theme'] = $person->theme;
-
         }
 
         return $result;
