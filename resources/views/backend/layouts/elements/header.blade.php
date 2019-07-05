@@ -1,9 +1,9 @@
 <!-- Logo -->
 <a href="{{ route('backend.index') }}" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><b>J</b>PT</span>
+    <span class="logo-mini">{!! env('SYSTEM_HEADER_SHORT') !!}</span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>傑思.愛德威</b>展示系統</span>
+    <span class="logo-lg">{!! env('SYSTEM_HEADER') !!}</span>
 </a>
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top">
@@ -18,13 +18,13 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{ asset('backend/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                    <img src="@if(isset(session(env('LOGINSESSION','virtualorz_default'))['login_user']['pic']) && session(env('LOGINSESSION','virtualorz_default'))['login_user']['pic'] != ''){{ session(env('LOGINSESSION','virtualorz_default'))['login_user']['pic'] }}@else{{ asset('backend/dist/img/user2-160x160.jpg') }}@endif" class="user-image" alt="User Image">
                     <span class="hidden-xs">{{ session('js_promote.login_user.name') }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header">
-                        <img src="{{ asset('backend/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                        <img src="@if(isset(session(env('LOGINSESSION','virtualorz_default'))['login_user']['pic']) && session(env('LOGINSESSION','virtualorz_default'))['login_user']['pic'] != ''){{ session(env('LOGINSESSION','virtualorz_default'))['login_user']['pic'] }}@else{{ asset('backend/dist/img/user2-160x160.jpg') }}@endif" class="img-circle" alt="User Image">
 
                         <p>
                             {{ session('js_promote.login_user.name') }} - {{ session('js_promote.login_user.department') }}
@@ -39,15 +39,14 @@
                                     <div class="col-xs-4 text-center"><a href="{{Route($v['menu']['id'])}}">{{$v['menu']['name']}}</a></div>
                                 @endforeach
                             @endif
-                            <div class="col-xs-4 text-center">
-                                <a href="{{ route('login.logout')}}">登出</a>
-                            </div>
                         </div>
                         <!-- /.row -->
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">
-
+                        <div class="pull-right">
+                            <a href="{{ route('login.logout')}}" class="btn btn-default btn-flat">登出</a>
+                        </div>
                     </li>
                 </ul>
             </li>

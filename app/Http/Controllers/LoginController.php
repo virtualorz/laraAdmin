@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\system_permission;
 use App\customer;
 use App\adminuser;
+use App\member_style;
 use Session;
 
 use Storage;
@@ -190,6 +191,12 @@ class LoginController extends Controller
                             //依照權限 系統route 產生選單
                             $menu = Sitemap::getMenu($parmissionArray);
 
+                            //取得個人化設定
+                            $personal = self::getMemberStyle($user['id']);
+                            $user['pic'] = $personal['pic'];
+                            $user['name'] = $personal['name'];
+                            $user['theme'] = $personal['theme'];
+
 
                             //存入session
                             session(['js_promote' =>
@@ -270,6 +277,12 @@ class LoginController extends Controller
 
                         //依照權限 系統route 產生選單
                         $menu = Sitemap::getMenu($parmissionArray);
+
+                        //取得個人化設定
+                        $personal = self::getMemberStyle($adminUser->id);
+                        $adminUser->pic = $personal['pic'];
+                        $adminUser->name = $personal['name'];
+                        $adminUser->theme = $personal['theme'];
 
 
                         //存入session
@@ -352,7 +365,8 @@ class LoginController extends Controller
                     "email" => "it@js-adways.com.tw",
                     "account" => "Admin",
                     "code" => "",
-                    "status" => 1
+                    "status" => 1,
+                    'created_at' => date('Y-m-d')
                 ];
 
                 //取得全部權限
@@ -363,6 +377,12 @@ class LoginController extends Controller
                         array_push($parmissionArray,$v1);
                     }
                 }
+
+                //取得個人化設定
+                $personal = self::getMemberStyle($adminUser['id']);
+                $adminUser['pic'] = $personal['pic'];
+                $adminUser['name'] = $personal['name'];
+                $adminUser['theme'] = $personal['theme'];
 
                 //存入session
                 session(['js_promote' =>
@@ -390,5 +410,23 @@ class LoginController extends Controller
 
         return self::$message;
 
+    }
+
+    protected static function getMemberStyle($id){
+        //取得個人設定資料
+        $person = member_style::find($id);
+        $result = [];
+        if($person != null){
+            $person->pic = json_decode($person->pic,true);
+            $result['pic'] = '';
+            if(count($person->pic) != 0){
+                $result['pic'] = Storage::url(env('UPLOADDIR').'/'.$person->pic[0]['name']);
+            }
+            $result['name'] = $person->show_name;
+            $result['theme'] = $person->theme;
+
+        }
+
+        return $result;
     }
 }

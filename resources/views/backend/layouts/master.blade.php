@@ -77,7 +77,7 @@
     <script src="{{ asset('backend/bower_components/jquery/dist/jquery.min.js') }}"></script>
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition @if(isset(session(env('LOGINSESSION','virtualorz_default'))['login_user']['theme']) && session(env('LOGINSESSION','virtualorz_default'))['login_user']['theme'] != ''){{ session(env('LOGINSESSION','virtualorz_default'))['login_user']['theme'] }}@else skin-blue @endif sidebar-mini">
 <div class="alert-area alert alert-dismissible" role="alert" style="padding:22px !important; margin-bottom:0px !important;display:none">
     <button type="button" class="close" onclick="$('.alert').hide()">
         <span aria-hidden="true">&times;</span>
@@ -120,11 +120,7 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
-        </div>
-        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-        reserved.
+        {!! env('SYSTEM_FOOTER') !!}
     </footer>
 
     <!-- Control Sidebar -->

@@ -171,4 +171,22 @@ Route::group(['middleware' => ['checkLogin','checkPermission'], 'prefix' => '/Ba
         ]);
     //=======================================================
 
+    /*
+     * 個人資料捨定
+     */
+    Route::get('/Personal/member',
+        [
+            'as' => 'backend.personal.member' ,
+            'uses' => 'backend\PersonalController@member',
+            'parent'=> 'root',
+            'name' => '個人資料'
+        ]);
+    Route::post('/Personal/member',
+        [
+            'as' => 'backend.personal.member.ajax_edit' ,
+            'uses' => 'backend\PersonalController@ajax_edit_personal',
+            'parent'=> 'backend.personal.member',
+        ]);
+    //=======================================================
+
 });

@@ -1,7 +1,7 @@
 <!-- Sidebar user panel -->
 <div class="user-panel">
     <div class="pull-left image">
-        <img src="{{ asset('backend/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+        <img src="@if(isset(session(env('LOGINSESSION','virtualorz_default'))['login_user']['pic']) && session(env('LOGINSESSION','virtualorz_default'))['login_user']['pic'] != ''){{ session(env('LOGINSESSION','virtualorz_default'))['login_user']['pic'] }}@else{{ asset('backend/dist/img/user2-160x160.jpg') }}@endif" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
         <p>{{ session('js_promote.login_user.name') }}</p>
