@@ -28,7 +28,7 @@
 
                         <p>
                             {{ session(env('LOGINSESSION','virtualorz_default').'.login_user.name') }} - {{ session(env('LOGINSESSION','virtualorz_default').'.login_user.department') }}
-                            <small>Member since {{ session(env('LOGINSESSION','virtualorz_default').'.login_user.created_at') }}</small>
+                            <small>Member since {{ date("Y-m-d",strtotime(session(env('LOGINSESSION','virtualorz_default').'.login_user.created_at'))) }}</small>
                         </p>
                     </li>
                     <!-- Menu Body -->

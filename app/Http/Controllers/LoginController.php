@@ -288,11 +288,34 @@ class LoginController extends Controller
                             $adminUser->theme = $personal['theme'];
                         }
 
+                        //取得管理員名單
+                        $member = adminuser::orderBy('created_at','DESC')
+                            ->get()->toArray();
+                        foreach($member as $k=>$v){
+                            $member[$k]['department_id'] = 0;
+                            $member[$k]['org_name'] = $v['name'];
+                            $member[$k]['email'] = '';
+                            $member[$k]['code'] = '';
+                        }
+
+                        $admin = [
+                            "id" => 0,
+                            "department_id" => 0,
+                            "name" => "Admin",
+                            "org_name" => "Admin",
+                            "email" => "it@js-adways.com.tw",
+                            "account" => "Admin",
+                            "code" => "",
+                            "status" => 1
+                        ];
+                        array_push($member,$admin);
+
 
                         //存入session
                         session([env('LOGINSESSION','virtualorz_default') =>
                             [
                                 'login_user' => $adminUser,
+                                'member' => $member,
                                 'permission' => $parmissionArray,
                                 'identity' => $identityArray,
                                 'menu' => $menu,
@@ -390,10 +413,33 @@ class LoginController extends Controller
                     $adminUser['theme'] = $personal['theme'];
                 }
 
+                //取得管理員名單
+                $member = adminuser::orderBy('created_at','DESC')
+                    ->get()->toArray();
+                foreach($member as $k=>$v){
+                    $member[$k]['department_id'] = 0;
+                    $member[$k]['org_name'] = $v['name'];
+                    $member[$k]['email'] = '';
+                    $member[$k]['code'] = '';
+                }
+
+                $admin = [
+                    "id" => 0,
+                    "department_id" => 0,
+                    "name" => "Admin",
+                    "org_name" => "Admin",
+                    "email" => "it@js-adways.com.tw",
+                    "account" => "Admin",
+                    "code" => "",
+                    "status" => 1
+                ];
+                array_push($member,$admin);
+
                 //存入session
                 session([env('LOGINSESSION','virtualorz_default') =>
                     [
                         'login_user' => $adminUser,
+                        'member' => $member,
                         'permission' => $parmissionArray,
                         'identity' => Config('permission_identity.identity'),
                         'menu' => $menu,
