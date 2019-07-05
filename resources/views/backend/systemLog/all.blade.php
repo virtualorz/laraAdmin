@@ -26,7 +26,7 @@
                                 <td>{{ $log_action[$v->action] }}</td>
                                 <td>{{ $v->remark }}</td>
                                 <td>{{ $v->created_at }}</td>
-                                <td>{{ session('js_promote.member')[$v->update_member_id]['name'] }}</td>
+                                <td>{{ session(env('LOGINSESSION','virtualorz_default').'.member')[$v->update_member_id]['name'] }}</td>
                                 <td>
                                     <button class="btn btn-info btn-url" data-url="{{ route('backend.system.log.all.content',['id'=>$v->id]) }}">異動內容</button>
                                 </td>

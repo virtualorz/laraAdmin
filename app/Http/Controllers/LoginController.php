@@ -78,7 +78,7 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        session::forget('js_promote');
+        session::forget(env('LOGINSESSION','virtualorz_default'));
         session::forget('return_url');
 
         return redirect()->route('login.no_hash');
@@ -199,7 +199,7 @@ class LoginController extends Controller
 
 
                             //存入session
-                            session(['js_promote' =>
+                            session([env('LOGINSESSION','virtualorz_default') =>
                                 [
                                     'login_user' => $user,
                                     'department' => $department,
@@ -286,7 +286,7 @@ class LoginController extends Controller
 
 
                         //存入session
-                        session(['js_promote' =>
+                        session([env('LOGINSESSION','virtualorz_default') =>
                             [
                                 'login_user' => $adminUser,
                                 'permission' => $parmissionArray,
@@ -334,7 +334,7 @@ class LoginController extends Controller
                 ->first();
             if ($customer != null) {
                 //存入session
-                session(['js_promote_customer' =>
+                session([env('LOGINSESSION_CUSTOMER','virtualorz_customer_default') =>
                     [
                         'login_user' => $customer
                     ]
@@ -385,7 +385,7 @@ class LoginController extends Controller
                 $adminUser['theme'] = $personal['theme'];
 
                 //存入session
-                session(['js_promote' =>
+                session([env('LOGINSESSION','virtualorz_default') =>
                     [
                         'login_user' => $adminUser,
                         'permission' => $parmissionArray,

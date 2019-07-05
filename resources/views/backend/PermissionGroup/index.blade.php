@@ -23,7 +23,7 @@
         </div>
         <div class="box box-success">
             <div class="box-header">
-                @if(in_array('backend.permission.group.add',session('js_promote.permission')))
+                @if(in_array('backend.permission.group.add',session(env('LOGINSESSION','virtualorz_default').'.permission')))
                 <button class="btn btn-success btn-url" data-url="{{ Route('backend.permission.group.add') }}">新增群組</button>
                 @endif
             </div>
@@ -48,10 +48,10 @@
                         <td>{{ $v->created_at->format('Y-m-d') }}</td>
                         <td>@if($v->enable == 0)停用 @else 啟用 @endif</td>
                         <td>
-                            @if(in_array('backend.permission.group.edit',session('js_promote.permission')))
+                            @if(in_array('backend.permission.group.edit',session(env('LOGINSESSION','virtualorz_default').'.permission')))
                             <button class="btn btn-info btn-url" data-url="{{ route('backend.permission.group.edit',['id'=>$v['id']]) }}">編輯</button>
                             @endif
-                            @if(in_array('backend.permission.group.ajax_delete',session('js_promote.permission')))
+                            @if(in_array('backend.permission.group.ajax_delete',session(env('LOGINSESSION','virtualorz_default').'.permission')))
                             <button class="btn btn-danger btn-ajax" data-toggle="modal" data-target="#modal-danger"
                                     data-url="{{ route('backend.permission.group.ajax_delete',['id'=>$v['id']])}}">刪除</button>
                             @endif

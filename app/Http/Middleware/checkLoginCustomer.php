@@ -25,15 +25,5 @@ class checkLoginCustomer
         else{
             return $next($request);
         }
-
-        /*
-        if(session('js_promote_customer') == null && session('js_promote') == null)
-        {
-            session(['return_url'=> $request->fullUrl()]);
-
-            return redirect()->route('login',['hash' => $request->route('hash')]);
-        }
-        return $next($request);
-        */
     }
 }

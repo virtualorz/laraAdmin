@@ -22,16 +22,5 @@ class checkPermission
         if($result){
             return $next($request);
         }
-
-        /*
-        $checkPermission = Route::currentRouteName();
-        if(!isset(Route::current()->action['name'])){
-            $checkPermission = Route::current()->action['parent'];
-        }
-        if(!in_array($checkPermission,session('js_promote.permission'))){
-            //abort(403, '沒有使用權限');
-        }
-        return $next($request);
-        */
     }
 }

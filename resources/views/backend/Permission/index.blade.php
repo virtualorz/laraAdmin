@@ -44,10 +44,10 @@
                                 <td>{{ $v['identity_name'] }}</td>
                                 <td>@if($v['created_at'] != ''){{ date('Y-m-d',strtotime($v['created_at'])) }}@endif</td>
                                 <td>
-                                    @if(in_array('backend.permission.edit',session('js_promote.permission')))
+                                    @if(in_array('backend.permission.edit',session(env('LOGINSESSION','virtualorz_default').'.permission')))
                                         <button class="btn btn-info btn-url" data-url="{{ route('backend.permission.edit',['id'=>$v['id']]) }}">編輯</button>
                                     @endif
-                                    @if(in_array('backend.permission.ajax_delete',session('js_promote.permission')))
+                                    @if(in_array('backend.permission.ajax_delete',session(env('LOGINSESSION','virtualorz_default').'.permission')))
                                         <button class="btn btn-danger btn-ajax" data-toggle="modal" data-target="#modal-danger"
                                                 data-url="{{ route('backend.permission.ajax_delete',['id'=>$v['id']])}}">刪除</button>
                                     @endif

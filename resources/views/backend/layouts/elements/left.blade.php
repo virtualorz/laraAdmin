@@ -4,7 +4,7 @@
         <img src="@if(isset(session(env('LOGINSESSION','virtualorz_default'))['login_user']['pic']) && session(env('LOGINSESSION','virtualorz_default'))['login_user']['pic'] != ''){{ session(env('LOGINSESSION','virtualorz_default'))['login_user']['pic'] }}@else{{ asset('backend/dist/img/user2-160x160.jpg') }}@endif" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
-        <p>{{ session('js_promote.login_user.name') }}</p>
+        <p>{{ session(env('LOGINSESSION','virtualorz_default').'.login_user.name') }}</p>
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
     </div>
 </div>
@@ -23,8 +23,8 @@
 <ul class="sidebar-menu" data-widget="tree">
     <li class="header">主選單</li>
     @php ($systen_id = 0)
-    @if(session('js_promote') != null)
-        @foreach(session('js_promote.menu') as $k=>$v)
+    @if(session(env('LOGINSESSION','virtualorz_default')) != null)
+        @foreach(session(env('LOGINSESSION','virtualorz_default').'.menu') as $k=>$v)
             @if(in_array(Route::currentRouteName(),$v['map']))
                 @php($systen_id = $k)
 
@@ -33,8 +33,8 @@
         @endforeach
     @endif
 
-    @if(session('js_promote') != null)
-        @foreach(session('js_promote.menu')[$systen_id]['left'] as $k=>$v)
+    @if(session(env('LOGINSESSION','virtualorz_default')) != null)
+        @foreach(session(env('LOGINSESSION','virtualorz_default').'.menu')[$systen_id]['left'] as $k=>$v)
             <li class="treeview @if((isset(Route::getCurrentRoute()->action['label']) && Route::getCurrentRoute()->action['label'] == $k) || (isset(Route::getRoutes()->getByName(Route::getCurrentRoute()->action['parent'])->action['label']) && Route::getRoutes()->getByName(Route::getCurrentRoute()->action['parent'])->action['label'] == $k)) active @endif">
                 <a href="#">
                     <i class="fa {{ $v['fa'] }}"></i> <span>{{ $k }}</span>

@@ -25,17 +25,5 @@ class checkLogin
         else{
             return $next($request);
         }
-
-        /*iif(session('js_promote') == null)
-        {
-            session(['return_url'=> $request->fullUrl()]);
-            return redirect('home');
-        }
-
-
-        if($result) {
-            return $next($request);
-        }
-        */
     }
 }
