@@ -35,6 +35,9 @@
 
     @if(session(env('LOGINSESSION','virtualorz_default')) != null)
         @foreach(session(env('LOGINSESSION','virtualorz_default').'.menu')[$systen_id]['left'] as $k=>$v)
+            @if(env('LOGIN_PATH') == 'remote' && $k == '管理員')
+                @continue
+            @endif
             <li class="treeview @if((isset(Route::getCurrentRoute()->action['label']) && Route::getCurrentRoute()->action['label'] == $k) || (isset(Route::getRoutes()->getByName(Route::getCurrentRoute()->action['parent'])->action['label']) && Route::getRoutes()->getByName(Route::getCurrentRoute()->action['parent'])->action['label'] == $k)) active @endif">
                 <a href="#">
                     <i class="fa {{ $v['fa'] }}"></i> <span>{{ $k }}</span>
@@ -49,18 +52,5 @@
                 </ul>
             </li>
         @endforeach
-    @else
-        <li class="treeview menu-open">
-            <a href="#">
-                <i class="fa fa-files-o"></i> <span>API文件</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu" style="display: block;">
-                <li><a href="{{Route('system.api.customer')}}"><i class="fa fa-circle-o"></i>客戶代理商資料同步</a></li>
-                <li><a href="{{ Route('system.api.trace') }}"><i class="fa fa-circle-o"></i>業務追蹤客戶</a></li>
-            </ul>
-        </li>
     @endif
 </ul>
