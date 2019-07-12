@@ -27,3 +27,6 @@ LOGIN_PATH : login method, 'remote' for remote login , 'local' for local login <
 LOGIN_TITLE : text for login view title <br />
 LOGIN_VIEW : login view style, 'custom' for front page login style, 'admin' for AdminLte defualt login view <br />
 FILESYSTEM_DRIVER : use in config/filesystem, defult use : public <br />
+
+# Run Migration
+    php artisan migrate
