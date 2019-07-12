@@ -7,7 +7,7 @@ build in CRUD control log <br />
 suild in admin account CRUD method (if using local login)
 
 # Install
-    composer create-project --prefer-dist virtualorz/laraAdmin PROJECT_NAME
+    composer create-project --prefer-dist virtualorz/laraadmin PROJECT_NAME
     
 # edit .env file
 copy .env.example to .env and add this variables :
