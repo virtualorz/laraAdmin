@@ -14,10 +14,11 @@ class CreateSystemPermission extends Migration
     public function up()
     {
         Schema::create('system_permission', function (Blueprint $table) {
-            $table->integer('permission_group_id');
-            $table->integer('member_id');
+            $table->integer('permission_group_id')->comment('群組名稱');
+            $table->integer('member_id')->comment('管理員ID');
             $table->dateTime('created_at');
             $table->integer('create_member_id');
+            $table->primary(array('permission_group_id', 'member_id'));
         });
     }
 
