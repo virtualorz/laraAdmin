@@ -454,6 +454,7 @@ class LoginController extends Controller
                     }
                 }
                 else{
+                    $department = [];
                     //取得管理員名單
                     $member = adminuser::orderBy('created_at','DESC')
                         ->get()->toArray();
@@ -482,6 +483,7 @@ class LoginController extends Controller
                     [
                         'login_user' => $adminUser,
                         'member' => $member,
+                        'department' => $department,
                         'permission' => $parmissionArray,
                         'identity' => Config('permission_identity.identity'),
                         'menu' => $menu,
