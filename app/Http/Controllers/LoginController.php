@@ -413,27 +413,69 @@ class LoginController extends Controller
                     $adminUser['theme'] = $personal['theme'];
                 }
 
-                //取得管理員名單
-                $member = adminuser::orderBy('created_at','DESC')
-                    ->get()->toArray();
-                foreach($member as $k=>$v){
-                    $member[$k]['department_id'] = 0;
-                    $member[$k]['org_name'] = $v['name'];
-                    $member[$k]['email'] = '';
-                    $member[$k]['code'] = '';
-                }
+                if(env('LOGIN_PATH','local') == 'remote') {
+                    //取得人員部門資料
+                    $post = 'token=' . urlencode('ubMpV71c+2cacHTasodPdT223wao6bbuEBKhHwO5U5w=');
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, env('API_GETMEMBER_URL'));
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    $resultMember = curl_exec($ch);
+                    curl_close($ch);
 
-                $admin = [
-                    "id" => 0,
-                    "department_id" => 0,
-                    "name" => "Admin",
-                    "org_name" => "Admin",
-                    "email" => "it@js-adways.com.tw",
-                    "account" => "Admin",
-                    "code" => "",
-                    "status" => 1
-                ];
-                array_push($member,$admin);
+                    $resultMember = json_decode($resultMember, true);
+
+                    if ($resultMember['status'] == 1) {//取得成功
+                        $department = $resultMember['data']['department'];
+                        $member = $resultMember['data']['member'];
+                        //增加一個預設管理人員
+                        $member[0] = [
+                            "id" => 0,
+                            "department_id" => 0,
+                            "name" => "Admin",
+                            "org_name" => "Admin",
+                            "email" => "it@js-adways.com.tw",
+                            "account" => "Admin",
+                            "code" => "",
+                            "status" => 1
+                        ];
+
+                        //整理部門與人員資訊陣列
+                        foreach ($department as $k => $v) {
+                            $department[$k]['members'] = [];
+                            foreach ($member as $k1 => $v1) {
+                                if ($v1['department_id'] == $v['id']) {
+                                    array_push($department[$k]['members'], $v1);
+                                }
+                            }
+                        }
+                    }
+                }
+                else{
+                    //取得管理員名單
+                    $member = adminuser::orderBy('created_at','DESC')
+                        ->get()->toArray();
+                    foreach($member as $k=>$v){
+                        $member[$k]['department_id'] = 0;
+                        $member[$k]['org_name'] = $v['name'];
+                        $member[$k]['email'] = '';
+                        $member[$k]['code'] = '';
+                    }
+
+                    $admin = [
+                        "id" => 0,
+                        "department_id" => 0,
+                        "name" => "Admin",
+                        "org_name" => "Admin",
+                        "email" => "it@js-adways.com.tw",
+                        "account" => "Admin",
+                        "code" => "",
+                        "status" => 1
+                    ];
+                    array_push($member,$admin);
+                }
 
                 //存入session
                 session([env('LOGINSESSION','virtualorz_default') =>
