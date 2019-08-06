@@ -71,7 +71,7 @@ class PermissionGroupController extends Controller
         return view('backend.PermissionGroup.edit',[
             'data' => $data,
             'sitemap' => json_encode($sitemap),
-            'identity' => Config('system.identity')
+            'identity' => Config('permission_identity.identity')
         ]);
     }
 

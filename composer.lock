@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "80e62606753bbe9f45801c8efd0c144c",
+    "content-hash": "49101edbaa155bc8dceda5988df53796",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2854,16 +2854,16 @@
         },
         {
             "name": "virtualorz/fileupload",
-            "version": "0.0.8",
+            "version": "0.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/virtualorz/fileupload.git",
-                "reference": "506e5b68799643131845fe792884018de1c7180d"
+                "reference": "9288dbfb6858090a15465477315fb084b2db8125"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/virtualorz/fileupload/zipball/506e5b68799643131845fe792884018de1c7180d",
-                "reference": "506e5b68799643131845fe792884018de1c7180d",
+                "url": "https://api.github.com/repos/virtualorz/fileupload/zipball/9288dbfb6858090a15465477315fb084b2db8125",
+                "reference": "9288dbfb6858090a15465477315fb084b2db8125",
                 "shasum": ""
             },
             "type": "library",
@@ -2879,7 +2879,7 @@
                     "email": "virtualorz@gmail.com"
                 }
             ],
-            "time": "2019-07-05T02:27:45+00:00"
+            "time": "2019-08-02T06:23:13+00:00"
         },
         {
             "name": "virtualorz/permission",
