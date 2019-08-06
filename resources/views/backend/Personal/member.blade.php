@@ -6,11 +6,11 @@
             <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-aqua-active">
-                    <h3 class="widget-user-username">@if(isset($member_style->show_name) && $member_style->show_name != ''){{ $member_style->show_name }}@else{{ session(env('LOGINSESSION','virtualorz_default'))['login_user']['name'] }}@endif</h3>
+                    <h3 class="widget-user-username">@if(isset($member_style->show_name) && $member_style->show_name != ''){{ $member_style->show_name }}@else{{ User::get('name') }}@endif</h3>
                     <h5 class="widget-user-desc">{{ session('worklist')['login_user']['department'] }}</h5>
                 </div>
                 <div class="widget-user-image">
-                    <img class="img-circle" src="@if(isset($member_style->pic) && $member_style->pic != ''){{ Storage::url(env('UPLOADDIR').'/'.$files[0]['name']) }}@else{{ asset('backend/dist/img/user2-160x160.jpg') }}@endif" alt="User Avatar">
+                    <img class="img-circle" src="@if(count($files) != 0){{ Storage::url(env('UPLOADDIR').'/'.$files[0]['name']) }}@else{{ asset('backend/dist/img/user2-160x160.jpg') }}@endif" alt="User Avatar">
                 </div>
                 <div class="box-footer">
 
@@ -29,23 +29,23 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="name">姓名</label>
-                            <p>{{ session(env('LOGINSESSION','virtualorz_default'))['login_user']['org_name'] }}</p>
+                            <p>{{ User::get('org_name') }}</p>
                         </div>
                         <div class="form-group">
                             <label for="email">email</label>
-                            <p>{{ session(env('LOGINSESSION','virtualorz_default'))['login_user']['email'] }}</p>
+                            <p>{{ User::get('email') }}</p>
                         </div>
                         <div class="form-group">
                             <label for="department">所屬部門</label>
-                            <p>{{ session(env('LOGINSESSION','virtualorz_default'))['login_user']['department_id'] }}</p>
+                            <p>{{ User::get('department_id') }}</p>
                         </div>
                         <div class="form-group">
                             <label for="created_at">報到日期</label>
-                            <p>{{ session(env('LOGINSESSION','virtualorz_default'))['login_user']['created_at'] }}</p>
+                            <p>{{ User::get('created_at') }}</p>
                         </div>
                         <div class="form-group">
                             <label for="show_name">顯示名稱</label>
-                            <input type="text" class="form-control" id="show_name" name="show_name" value="@if(isset($member->show_name)){{ $member->show_name }}@else{{ session(env('LOGINSESSION','virtualorz_default'))['login_user']['name'] }}@endif">
+                            <input type="text" class="form-control" id="show_name" name="show_name" value="@if(isset($member->show_name)){{ $member->show_name }}@else{{ User::get('name') }}@endif">
                         </div>
                         <div class="form-group ">
                             <label for="pic">大頭貼</label>
@@ -58,7 +58,7 @@
                                 </span>
                             </span>
 
-                            {!! Fileupload::createUploadArea($files)!!}
+                            {!! Fileupload::createUploadArea('upload_file',$files)!!}
                             <br>
                         </div>
                         <div class="form-group ">

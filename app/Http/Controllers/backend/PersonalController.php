@@ -8,6 +8,7 @@ use Route;
 use App\member_style;
 use DB;
 use Storage;
+use User;
 
 class PersonalController extends Controller
 {
@@ -27,7 +28,7 @@ class PersonalController extends Controller
     public function member() {
 
         //取得個人設定資料
-        $member_style = member_style::where('id',session(env('LOGINSESSION','virtualorz_default'))['login_user']['id'])
+        $member_style = member_style::where('id',User::get('id'))
             ->first();
 
         return view('backend.Personal.member',[
@@ -55,8 +56,8 @@ class PersonalController extends Controller
 
         DB::beginTransaction();
         try{
-            if(member_style::where('id',session(env('LOGINSESSION','virtualorz_default'))['login_user']['id'])->exists()){
-                member_style::where('id',session(env('LOGINSESSION','virtualorz_default'))['login_user']['id'])
+            if(member_style::where('id',User::get('id'))->exists()){
+                member_style::where('id',User::get('id'))
                     ->update([
                         'show_name' => $request->post('show_name'),
                         'pic' => json_encode($files),
@@ -65,7 +66,7 @@ class PersonalController extends Controller
             }
             else{
                 member_style::create([
-                    'id' => session(env('LOGINSESSION','virtualorz_default'))['login_user']['id'],
+                    'id' => User::get('id'),
                     'show_name' => $request->post('show_name'),
                     'pic' => json_encode($files),
                     'theme' => ($request->post('theme') != null) ? $request->post('theme') : ''
@@ -73,7 +74,9 @@ class PersonalController extends Controller
             }
 
             //更新session
-            session([env('LOGINSESSION','virtualorz_default').'.login_user.pic' => Storage::url(env('UPLOADDIR').'/'.$files[0]['name'])]);
+            if(isset($files[0])) {
+                session([env('LOGINSESSION', 'virtualorz_default') . '.login_user.pic' => Storage::url(env('UPLOADDIR') . '/' . $files[0]['name'])]);
+            }
             session([env('LOGINSESSION','virtualorz_default').'.login_user.name' => $request->post('show_name')]);
             session([env('LOGINSESSION','virtualorz_default').'.login_user.theme' => $request->post('theme')]);
 
