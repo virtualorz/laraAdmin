@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49101edbaa155bc8dceda5988df53796",
+    "content-hash": "5a7e940e554a4c8185d7f9fe170cbef7",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2942,6 +2942,35 @@
                 }
             ],
             "time": "2019-06-27T04:02:52+00:00"
+        },
+        {
+            "name": "virtualorz/user",
+            "version": "0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/virtualorz/user.git",
+                "reference": "079e23c3ceceff593eb2347aaddd6fe9dc8ea18d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/virtualorz/user/zipball/079e23c3ceceff593eb2347aaddd6fe9dc8ea18d",
+                "reference": "079e23c3ceceff593eb2347aaddd6fe9dc8ea18d",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Virtualorz\\User\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "virtualorz",
+                    "email": "virtualorz@gmail.com"
+                }
+            ],
+            "time": "2019-08-06T07:14:29+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

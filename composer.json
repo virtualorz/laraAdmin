@@ -14,7 +14,8 @@
         "laravel/tinker": "^1.0",
         "virtualorz/fileupload": "^0.0.12",
         "virtualorz/permission": "^0.0.16",
-        "virtualorz/sitemap": "^0.0.3"
+        "virtualorz/sitemap": "^0.0.3",
+        "virtualorz/user": "^0.0.3"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

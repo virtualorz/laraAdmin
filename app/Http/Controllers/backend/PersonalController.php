@@ -75,10 +75,10 @@ class PersonalController extends Controller
 
             //更新session
             if(isset($files[0])) {
-                session([env('LOGINSESSION', 'virtualorz_default') . '.login_user.pic' => Storage::url(env('UPLOADDIR') . '/' . $files[0]['name'])]);
+                User::set('pic',Storage::url(env('UPLOADDIR') . '/' . $files[0]['name']));
             }
-            session([env('LOGINSESSION','virtualorz_default').'.login_user.name' => $request->post('show_name')]);
-            session([env('LOGINSESSION','virtualorz_default').'.login_user.theme' => $request->post('theme')]);
+            User::set('name',$request->post('show_name'));
+            User::set('theme',$request->post('theme'));
 
             DB::commit();
 
