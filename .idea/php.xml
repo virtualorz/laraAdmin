@@ -87,6 +87,7 @@
       <path value="$PROJECT_DIR$/vendor/virtualorz/actionlog" />
       <path value="$PROJECT_DIR$/vendor/virtualorz/permission" />
       <path value="$PROJECT_DIR$/vendor/virtualorz/fileupload" />
+      <path value="$PROJECT_DIR$/vendor/virtualorz/user" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
